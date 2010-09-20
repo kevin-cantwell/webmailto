@@ -5,8 +5,10 @@ Copyright (c) 2010 Kevin Cantwell
 License? Meh. (Just don't sell it, ok?)
 
 This plugin adds a context menu containing a list of webmail 
-options when the user hovers over a mailto link. The original 
-link remains unchanged (ie: It will still open the default 
+options when the user hovers over a mailto link. The webmail
+will open directly into a compose window. To, cc, bcc, subject,
+and body parameters are maintained from the original mailto link.
+The original link remains unchanged (ie: It will still open the default 
 mail client).
 
 Usage:
