@@ -3,32 +3,103 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-	<title>kevin-cantwell/webmailto @ GitHub</title>
-	
+	<title>jquery.webmailto.js</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script> 
+  <script src="http://github.com/kevin-cantwell/webmailto/raw/master/jquery.webmailto.js" type="text/javascript"></script> 
+  
+  <script type="text/javascript"> 
+    $(document).ready(function() {
+      $('#mailme').webmailto( { class : 'custom' } );
+      $('.example:eq(0) a').webmailto();
+      $('.example:eq(1) a').webmailto( { class : 'custom' } );
+      $('.example:eq(2) a').webmailto( { class : 'mymailto' } );
+    });
+  </script>
+  
 	<style type="text/css">
 		body {
   		margin-top: 1.0em;
-  		background-color: #295110;
 		  font-family: "Helvetica,Arial,FreeSans";
-  		color: #ffffff;
+    }
+    a { 
+      color: #0033FF; 
+    }
+    code {
+     background  : #E8E8E8;
     }
     #container {
       margin: 0 auto;
       width: 700px;
     }
-		h1 { font-size: 3.8em; color: #d6aeef; margin-bottom: 3px; }
-		h1 .small { font-size: 0.4em; }
-		h1 a { text-decoration: none }
-		h2 { font-size: 1.5em; color: #d6aeef; }
-    h3 { text-align: center; color: #d6aeef; }
-    a { color: #d6aeef; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-		pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
+		h1 { 
+      font-size: 3.8em; 
+      margin-bottom: 3px; 
+    }
+		h1 .small { 
+      font-size: 0.4em; 
+    }
+		h1 a { 
+      text-decoration: none 
+    }
+    .description { 
+      font-size: 1.2em; 
+      margin-bottom: 30px; 
+      margin-top: 30px; 
+      font-style: italic;
+    }
+    .download { 
+      float: right; 
+    }
+    .footer { 
+      text-align:center; 
+      padding-top:30px; 
+      font-style: italic; 
+    }
+    .gist {
+      font-size  : .8em;
+    }
+    .example {
+      background : #F8F8F8;
+      padding    : 5px;
+      border     : 1px dashed #B8B8B8;
+    }
+    .example a {
+      margin-right : 20px;
+    }
+   
+    ul.mymailto {
+      list-style       : none;
+      margin           : 0;
+      padding          : 0;
+      background-color : #dcdcdc;
+      border           : 1px solid #7166fb;
+    }
+    ul.mymailto li {
+      display          : inline;
+    }
+    ul.mymailto li a {
+      margin           : 2px;
+      display          : inline-block;
+    }
+    
+    ul.custom {
+      list-style       : none;
+      margin           : 0;
+      padding          : 0;
+      background-image : url('img/webmails.png');
+    }
+    ul.custom li {
+      display          : inline;
+    }
+    ul.custom li a {
+      margin           : 0;
+      display          : inline-block;
+      text-indent      : -9999px;
+      width            : 50px;
+      height           : 50px;
+    }  
 	</style>
 	
 </head>
@@ -46,28 +117,62 @@
     </div>
 
     <h1><a href="http://github.com/kevin-cantwell/webmailto">webmailto</a>
-      <span class="small">by <a href="http://github.com/kevin-cantwell">kevin-cantwell</a></span></h1>
+      <span class="small">by <a id="mailme" href="mailto:kevin.cantwell@gmail.com?subject=jquery.webmailto.js">kevin-cantwell</a></span></h1>
 
     <div class="description">
       Webmail Mailto jQuery Plugin
     </div>
+  
+    <h2>How to Use the Webmailto Plugin</h2>
+    
+    <p>First make sure to include the plugin inside your <code>&lt;head/&gt;</code> tag:</p>
+    
+    <p><script src="http://gist.github.com/597431.js?file=webmailto.include.html"></script></p>
+    
+    <p>Then you can call webmailto on link tags in the normal jQuery way:</p>
+    
+    <p><script src="http://gist.github.com/597426.js?file=webmailto.invoke.vanilla.js"></script></p>
+    
+    <p>Hovering over any matched elements will cause an absolutely positioned list of webmail 
+       links to appear nearby. If the selector matches a link tag which is not a mailto link,
+       or if the tag is not an <code>&lt;a/&gt;</code> tag, then it is silently ignored. In the above
+       case, all mailto links on the page would be matched.</p>
+       
+    <p>Here's an example of the most vanilla case, without any styling:</p>
+    
+    <p class="example" id="example1" style="height:100px;">
+      <a href="mailto:first@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back y'all!">first@example.com</a>
+      <a href="mailto:second@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back y'all!">second@example.com</a>
+      <a href="mailto:third@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back y'all!">third@example.com</a></p>
+      
+    <p>You'll notice in the above example that webmailto does not apply any default 
+       styling. However, you can define your own styles by implementing the <code>webmailto</code>
+       class or by passing css into the plugin as optional parameters.</p>
 
-    <h2>Authors</h2>
-<p>Kevin Cantwell (kevin.cantwell@gmail.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p> (kevin.cantwell@gmail.com)<br/>      </p>
+    <p>Implementing the <code>webmailto</code> class:</p>
+    
+    <p><script src="http://gist.github.com/597502.js?file=webmailto.custom.css"></script></p>
+    
+    <p class="example" style="height:50px;">
+      <a href="mailto:first@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back y'all!">first@example.com</a>
+      <a href="mailto:second@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back y'all!">second@example.com</a>
+      <a href="mailto:third@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back y'all!">third@example.com</a></p>
 
+    <p>Passing in your own css to the plugin:</p>
+    
+    <p><script src="http://gist.github.com/597530.js?file=webmailto.alternate.css"></script></p>
+    
+    <p><script src="http://gist.github.com/597462.js?file=webmailto.invoke.with.css.js"></script></p>
+    
+    <p>The resulting links with styling applied:</p>
+    
+    <p class="example" style="height:50px;">
+      <a href="mailto:first@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back y'all!">first@example.com</a>
+      <a href="mailto:second@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back y'all!">second@example.com</a>
+      <a href="mailto:third@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back y'all!">third@example.com</a></p>
 
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/kevin-cantwell/webmailto/zipball/master">zip</a> or
-      <a href="http://github.com/kevin-cantwell/webmailto/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/kevin-cantwell/webmailto</pre>
-    </p>
+    <p>Enjoy and happy webmailing!</p>
+
 
     <div class="footer">
       get the source code on GitHub : <a href="http://github.com/kevin-cantwell/webmailto">kevin-cantwell/webmailto</a>
