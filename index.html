@@ -15,6 +15,14 @@
       $('.example:eq(0) a').webmailto();
       $('.example:eq(1) a').webmailto( { className : 'custom' } );
       $('.example:eq(2) a').webmailto( { className : 'mymailto' } );
+      $('.example:eq(3) a').webmailto( 
+        { 
+          className : 'custom', 
+          callback  : function(newWindow) {
+            newWindow.confirm('Destroy the warp core?');
+          }
+        } 
+      );
     });
   </script>
   
@@ -141,9 +149,9 @@
     <p>Here's an example of the most vanilla case, without any styling:</p>
     
     <p class="example" id="example1" style="height:100px;">
-      <a href="mailto:first@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back y'all!">first@example.com</a>
-      <a href="mailto:second@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back y'all!">second@example.com</a>
-      <a href="mailto:third@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back y'all!">third@example.com</a></p>
+      <a href="mailto:first@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back!">first@example.com</a>
+      <a href="mailto:second@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back!">second@example.com</a>
+      <a href="mailto:third@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back!">third@example.com</a></p>
       
     <p>You'll notice in the above example that webmailto does not apply any default 
        styling. However, you can define your own styles by implementing the <code>webmailto</code>
@@ -154,9 +162,9 @@
     <p><script src="http://gist.github.com/597502.js?file=webmailto.custom.css"></script></p>
     
     <p class="example" style="height:50px;">
-      <a href="mailto:first@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back y'all!">first@example.com</a>
-      <a href="mailto:second@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back y'all!">second@example.com</a>
-      <a href="mailto:third@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back y'all!">third@example.com</a></p>
+      <a href="mailto:first@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back!">first@example.com</a>
+      <a href="mailto:second@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back!">second@example.com</a>
+      <a href="mailto:third@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back!">third@example.com</a></p>
 
     <p>Passing in your own css to the plugin:</p>
     
@@ -167,9 +175,18 @@
     <p>The resulting links with styling applied:</p>
     
     <p class="example" style="height:50px;">
-      <a href="mailto:first@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back y'all!">first@example.com</a>
-      <a href="mailto:second@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back y'all!">second@example.com</a>
-      <a href="mailto:third@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back y'all!">third@example.com</a></p>
+      <a href="mailto:first@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back!">first@example.com</a>
+      <a href="mailto:second@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back!">second@example.com</a>
+      <a href="mailto:third@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back!">third@example.com</a></p>
+
+    <p>Webmailto can also give you a handle to the new webmail window via a callback function:</p>
+    
+    <p><script src="http://gist.github.com/598336.js?file=webmailto.callback.js"></script></p>
+    
+    <p class="example" style="height:50px;">
+      <a href="mailto:first@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back!">first@example.com</a>
+      <a href="mailto:second@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back!">second@example.com</a>
+      <a href="mailto:third@example.com?subject=Holla!&cc=cc@example.com&bcc=bcc@example.com&body=Holla back!">third@example.com</a></p>
 
     <p>Enjoy and happy webmailing!</p>
 
