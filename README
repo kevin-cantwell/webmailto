@@ -82,3 +82,21 @@ Passing in your own css class to the plugin to achieve multiple stylings:
         $('a.exciting').webmailto( { className : 'awesome-css' } );
       });
     </script>
+
+    
+*** Handle to New Window ***
+
+Webmailto can provide you a handle to the newly opened window via a callback
+function:
+
+    <script type="text/javascript">
+      $('a').webmailto( 
+        { 
+          className : 'custom', 
+          callback  : function(newWindow) {
+            // This may not work well in IE, sorry...
+            newWindow.confirm('Destroy the warp core?');
+          }
+        } 
+      );
+    </script>
