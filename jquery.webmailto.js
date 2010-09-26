@@ -32,17 +32,17 @@
     // Obligitory extending of configs;
     var options = $.extend(true, config, opts);
     
+    $(document)
+      .unbind('click.webmailto')
+      .bind('click.webmailto', function() { 
+        $('.webmailto').detach(); 
+      });
     
     // Filter off non-mailto links.    
     this.filter('a[href^=mailto:]').each( function() {
       
       
-      var $contextMenu = $('<ul/>', {
-                           'class' : 'webmailto ' + options.className
-                         }).mouseleave(function() {
-                           $(this).detach();
-                         });
-                         
+      var $contextMenu = $('<ul/>', { 'class' : 'webmailto ' + options.className });
 
       var $mailTo      = $(this)
                            .unbind('mouseenter.webmailto') // To prevent memory leaks
@@ -125,8 +125,8 @@
         var openWebmail = function( url ) {
         
           return function() {
-          
-            $(this).parent().parent().detach(); // this(a) -> parent(li) -> parent(ul)
+             
+            $('.webmailto').detach(); 
             
             var newWindow = window.open(url, '_blank', 'location=0,statusbar=0,menubar=0,width=600,height=600');
             
