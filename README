@@ -78,7 +78,7 @@ Passing in your own css class to the plugin to achieve multiple stylings:
     <script type="text/javascript">
       $(document).ready(function() {
         $('a.default').webmailto();
-        $('a.meh').webmailto( { class : 'mediocre-css' } );
-        $('a.exciting').webmailto( { class : 'awesome-css' } );
+        $('a.meh').webmailto( { className : 'mediocre-css' } );
+        $('a.exciting').webmailto( { className : 'awesome-css' } );
       });
     </script>
