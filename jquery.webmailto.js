@@ -1,14 +1,14 @@
 /*
  * Webmail Mailto jQuery Plugin
- * http://www.example.com/
+ * http://kevin-cantwell.github.com/webmailto/
  *
  * Copyright (c) 2010 Kevin Cantwell
- * License? Meh. (Just don't sell it, ok?)
+ * License: Meh. Just don't sell it, ok?
  *
- * This plugin adds a context menu containing a list of webmail 
- * options when the user hovers over a mailto link. The original 
- * link remains unchanged (ie: It will still open the default 
- * mail client).
+ * This plugin adds a context menu containing a list of webmail options when the 
+ * user hovers over a mailto link. They are given the option to compose an email 
+ * in one of three popular webmail services, Gmail, Yahoo, or Hotmail, instead of 
+ * in their boring old default mail client. 
  */
  
  

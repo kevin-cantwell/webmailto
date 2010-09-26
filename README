@@ -1,18 +1,84 @@
 Webmail Mailto jQuery Plugin
-http://www.example.com/
+http://kevin-cantwell.github.com/webmailto/
 
 Copyright (c) 2010 Kevin Cantwell
-License? Meh. (Just don't sell it, ok?)
+License: Meh. Just don't sell it, ok?
 
-This plugin adds a context menu containing a list of webmail 
-options when the user hovers over a mailto link. The webmail
-will open directly into a compose window. To, cc, bcc, subject,
-and body parameters are maintained from the original mailto link.
-The original link remains unchanged (ie: It will still open the default 
-mail client).
+*** WTH is it? ***
 
-Usage:
+When the user hovers over a mailto link, they are given the option to compose 
+an email in one of three popular webmail services, Gmail, Yahoo, or Hotmail, 
+instead of in their default mail client. 
 
-  $(document).ready(function() {
-    $('a').webmailto();
-  });
+
+*** Dependencies ***
+
+1) jQuery 1.4
+2) Availability of direct links to compose windows in Gmail, Yahoo, and Hotmail.
+
+
+*** Known Bugs ***
+
+1) Sometimes the webmail compose window doesn't completely load. This happens
+   most often with Yahoo. I don't think I have much control over this, 
+   so it's unlikely to be addressed.
+2) Hotmail bcc does not work. No idea why.
+
+
+*** How to Use the Webmailto Plugin ***
+
+First make sure to include jQuery and the plugin inside your <head/> tag:
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+    <script src="http://github.com/kevin-cantwell/webmailto/raw/master/jquery.webmailto.js" type="text/javascript"></script> 
+
+Then you can call webmailto on link tags in the normal jQuery way:
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+          $('a').webmailto();
+      });
+    </script>
+
+Hovering over any matched elements will cause an absolutely positioned list 
+of webmail links to appear underneath. If the selector matches a link tag which 
+is not a mailto link, or if the tag is not a <a/> tag, then it is silently ignored. 
+In the above case, all mailto links on the page would be matched.
+
+
+*** "Features" ***
+
+Webmailto does not apply any default styling. However, you can define your own 
+styles by implementing the webmailto class or by passing css into the plugin as 
+optional parameters.
+
+Implementing the webmailto class:
+
+    <style type="text/css">
+      ul.webmailto {
+        list-style       : none;
+        margin           : 0;
+        padding          : 0;
+        background-image : url('img/webmails.png');
+      }
+      ul.webmailto li {
+        display          : inline;
+      }
+      ul.webmailto li a {
+        margin           : 0;
+        display          : inline-block;
+        text-indent      : -9999px;
+        width            : 50px;
+        height           : 50px;
+      }
+    </style>
+
+Passing in your own css class to the plugin to achieve multiple stylings:
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('a.default').webmailto();
+        $('a.meh').webmailto( { class : 'mediocre-css' } );
+        $('a.exciting').webmailto( { class : 'awesome-css' } );
+      });
+    </script>
