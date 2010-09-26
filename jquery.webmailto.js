@@ -17,37 +17,35 @@
     
     
     var config = {
+      /*
+       * Calla back yo!
+       */
+      callback : function(newWindow) {},
       /* 
        * Specify the style here or simply define
-       * the webmailto class in your style sheet.
+       * the 'webmailto' class in your style sheet.
        */
-      css      : {
-        ul : { },
-        li : { },
-        a  : { }
-      },
-      // Calla back yo!
-      callback : function(newWindow) {}
+      class    : ''
     };
     
       
     // Obligitory extending of configs;
-    var options = $.extend(config, opts);
+    var options = $.extend(true, config, opts);
     
     
     // Filter off non-mailto links.    
     this.filter('a[href^=mailto:]').each( function() {
       
-        
+      
       var $contextMenu = $('<ul/>', {
-                           'class' : 'webmailto'
+                           'class' : 'webmailto ' + options.class
                          }).mouseleave(function() {
                            $(this).detach();
                          });
                          
 
       var $mailTo      = $(this)
-                           .unbind('mouseenter.webmailto')
+                           .unbind('mouseenter.webmailto') // To prevent memory leaks
                            .bind('mouseenter.webmailto', function() {
                              $('.webmailto').detach();
                              var pos = $(this).offset();
@@ -104,22 +102,27 @@
         
         // Init direct urls to popular webmail services
         var urls = {
-          'Gmail'     : 'https://mail.google.com/mail/?view=cm&fs=1&tf=1&shva=1' + 
-                        '&to='      + params.to +
-                        '&cc='      + params.cc +
-                        '&bcc='     + params.bcc +         
-                        '&su='      + params.subject +
-                        '&body='    + params.body,
-          'Yahoo'     : 'https://compose.mail.yahoo.com?' +
-                        'To='       + params.to +
-                        '&Cc='      + params.cc +
-                        '&Bcc='     + params.bcc +
-                        '&Subject=' + params.subject +
-                        '&Body='    + params.body,
-          'Hotmail'   : 'https://hotmail.com'
+          'gmail'   : 'https://mail.google.com/mail/?view=cm&fs=1&tf=1&shva=1' + 
+                      '&to='      + params.to +
+                      '&cc='      + params.cc +
+                      '&bcc='     + params.bcc +         
+                      '&su='      + params.subject +
+                      '&body='    + params.body,
+          'yahoo'   : 'http://compose.mail.yahoo.com/?' +
+                      'to='       + params.to +
+                      '&cc='      + params.cc +
+                      '&bcc='     + params.bcc +
+                      '&subj='    + params.subject +
+                      '&body='    + params.body,
+          'hotmail' : 'http://mail.live.com/mail/EditMessageLight.aspx?n=' +
+                      '&to='      + params.to +
+                      '&cc='      + params.cc +
+                      '&bcc='     + params.bcc +
+                      '&subject=' + params.subject +
+                      '&body='    + params.body
         }
 
-        var windowOpenFunc = function( url ) {
+        var openWebmail = function( url ) {
         
           return function() {
           
@@ -135,15 +138,16 @@
           
         };   
         
-        for( i in urls ) {
+        for( svc in urls ) {
           
           var $li   = $('<li/>')
-                      .appendTo( $contextMenu );
+                        .appendTo( $contextMenu );
           var $link = $('<a/>', {
-                        'href'  : urls[i],
-                        'title' : 'Compose in ' + i,
-                        'text'  : i,
-                        'click' : windowOpenFunc(urls[i])
+                        'href'  : urls[svc],
+                        'class' : svc,
+                        'title' : 'Compose in ' + svc,
+                        'text'  : svc,
+                        'click' : openWebmail(urls[svc])
                       }).appendTo( $li );
         }
         
