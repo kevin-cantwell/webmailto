@@ -25,7 +25,7 @@
        * Specify the style here or simply define
        * the 'webmailto' class in your style sheet.
        */
-      class    : ''
+      className : ''
     };
     
       
@@ -38,7 +38,7 @@
       
       
       var $contextMenu = $('<ul/>', {
-                           'class' : 'webmailto ' + options.class
+                           'class' : 'webmailto ' + options.className
                          }).mouseleave(function() {
                            $(this).detach();
                          });
